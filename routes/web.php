@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth', 'checkaccess'], function() {
     Route::get('/dashboard', [PagesController::class, 'index'])->name('pages.index');
     Route::get('/profile', [LoginController::class, 'profile'])->name('profile');
     Route::put('update_profile', [LoginController::class, 'update_profile']);
+    Route::post('update_profile', [LoginController::class, 'update_profile']);
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 });
 

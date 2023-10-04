@@ -17,7 +17,16 @@
                     {{ session()->get('error')}}
                 </div>
             @endif
-            <form action="{{ url('update_profile') }}" method="POST">
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{$error}}</li>          
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            <form action="{{ url('update_profile') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method("PUT")
             <div class="form-group">
@@ -34,6 +43,14 @@
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
+            <div class="form-group">
+                <label for="image">Gambar Profil</label>
+                <input id="image" type="file" name="image" class="form-control">
+                @error('image')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+            
             <button class="btn btn-primary" type="submit">Simpan</button>
             </form>
         </div>

@@ -24,13 +24,18 @@ class DatabaseSeeder extends Seeder
        User::create([
         'name' => 'Arafie Setiawan',
         'email' => 'ara@gmail.com',
+        'amount' => 200000,
+        'address' => 'Jl. Tangerang Selatan',
         'password' => bcrypt('123'),
+        'image' => '',
        ]);
-
-       Accounts::create([
-        'amount' => 20000,
-        'address' => 'Jl. Cipsasa',
-        'user_id' => 1
+       User::create([
+        'name' => 'Zeastca',
+        'email' => 'zest@gmail.com',
+        'amount' => 400000,
+        'address' => 'Jl. Tangerang Barat',
+        'password' => bcrypt('123'),
+        'image' => '',
        ]);
     }
 }
