@@ -34,7 +34,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'NoAuth'], function() {
     Route::post('/', [LoginController::class, 'login']);
-    Route::get('/', [LoginController::class, 'index'])->name('login.index');
+    Route::get('/', [LoginController::class, 'index'])->name('index');
     
 });
 

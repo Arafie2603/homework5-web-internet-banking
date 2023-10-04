@@ -11,7 +11,7 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('pages.login');
+        return view('pages.index');
     }
     public function profile()
     {
