@@ -18,7 +18,6 @@ class CekLevelAdmin
         $level = $request->session()->get("role_user");
         if($level == 1)
         {
-            dd($level);
             return redirect()->intended('admin.dashboard');
         }
         return $next($request);

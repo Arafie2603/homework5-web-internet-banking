@@ -21,6 +21,13 @@
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
+        @if (Auth::user()->role_id == 1)
+        <li class="nav-item">
+            <a class="nav-link" href="">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Tables</span></a>
+        </li>
+        @endif
 
         <!-- Divider -->
         <hr class="sidebar-divider">
@@ -145,6 +152,7 @@
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
                 <a class="btn btn-primary" href="{{route('logout')}}">Keluar</a>
             </div>
+        
         </div>
     </div>
 </div>
