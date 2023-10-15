@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
@@ -16,28 +18,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
-// Routing tanpa parameter
-// Route::get('hello-word', function() {
-//     return '<h1>Sasa</h1>';
-// });
-
-// Routing dengan parameter
-// Route::get('my-name/{name}', function($name) {
-//     return 'My Name Is '. $name;
-// });
-
-// Routing dengan controller
 
 Route::group(['middleware' => 'NoAuth'], function() {
-    Route::post('/', [LoginController::class, 'login']);
-    Route::get('/', [LoginController::class, 'index'])->name('index');
+    Route::post('pendaftaran',[RegisterController::class,'store']);
+    Route::get('pendaftaran',[RegisterController::class,'index']);
+    
+    Route::get('/', [LoginController::class, 'index']);
+    Route::post('/daftar', [LoginController::class, 'login']);
     
 });
 
+Route::group(['middleware' => ['auth', 'cekleveladmin'], 'prefix' => 'admin'], function(){
+    // Route::get('dashboard', 'App\Http\Controllers\DashboardAdminController@index')->name('dashboard');
+    Route::get('dashboard', [AdminController::class, 'index']);
+});
 
 Route::group(['middleware' => 'auth', 'checkaccess'], function() {
     Route::get('/dashboard', [PagesController::class, 'index'])->name('pages.index');

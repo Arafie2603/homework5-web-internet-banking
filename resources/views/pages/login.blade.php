@@ -15,14 +15,14 @@
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Login</h1>
                         </div>
-                        <form method="post" action="{{ route('login.index') }}" enctype="multipart/form-data" class="user">
+                        <form method="POST" action="{{ url('daftar') }}" enctype="multipart/form-data" class="user">
                             @csrf
                             <div class="form-group">
-                                @if (session('message'))
-                                <div class="alert alert-danger alert-dimissible show fade">
+                                @if (session('success'))
+                                <div class="alert alert-success alert-dimissible show fade">
                                     <div class="alert-body">
                                         <button class="close" data-dismiss="alert"><span>x</span></button>
-                                        {{ session('message') }}
+                                        {{ session('success') }}
                                     </div>
                                 </div>
                                     
@@ -35,7 +35,7 @@
                                 <input name="password" type="password" class="form-control form-control-user" id="exampleInputEmail"
                                     placeholder="Password">
                             </div>
-                            
+                            <a href="{{url('/pendaftaran')}}">Register</a>
                             <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
                         </form>
                     </div>

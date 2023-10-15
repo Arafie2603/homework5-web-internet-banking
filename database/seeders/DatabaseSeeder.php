@@ -21,21 +21,13 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-       User::create([
-        'name' => 'Arafie Setiawan',
-        'email' => 'ara@gmail.com',
-        'amount' => 200000,
-        'address' => 'Jl. Tangerang Selatan',
-        'password' => bcrypt('123'),
-        'image' => '',
-       ]);
-       User::create([
-        'name' => 'Zeastca',
-        'email' => 'zest@gmail.com',
-        'amount' => 400000,
-        'address' => 'Jl. Tangerang Barat',
-        'password' => bcrypt('123'),
-        'image' => '',
-       ]);
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('admin'),
+            'image' => '',
+            'role_id' => 1
+
+        ]);
     }
 }
