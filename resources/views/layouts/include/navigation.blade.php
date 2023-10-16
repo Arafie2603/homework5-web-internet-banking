@@ -16,14 +16,24 @@
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
+        {{-- ======= UNTUK USER ====== --}}
+        @if (Auth::user()->role_id == 0)
         <li class="nav-item active">
             <a class="nav-link" href="{{route('pages.index')}}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
+        @endif
+        {{-- =====UNTUK ADMIN ===== --}}
         @if (Auth::user()->role_id == 1)
-        <li class="nav-item">
-            <a class="nav-link" href="">
+        <li class="nav-item {{ request()->is('dashboard') ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('pages.index')}}">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span></a>
+        </li>
+
+        <li class="nav-item {{ request()->is('admin/user') ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('user.index')}}">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Tables</span></a>
         </li>
