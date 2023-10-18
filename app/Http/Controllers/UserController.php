@@ -15,7 +15,9 @@ class UserController extends Controller
         
         $data_user = User::paginate(5);
         $user = User::where('id','=',Auth::User()->id)->firstOrFail();
-        return view('admin.user', compact('user', 'data_user'));
+        // return response()->json(array('success' => true, 'last_insert_id' => $user->id), 200);
+        $lastId = $user->latest()->value('id');
+        return view('admin.user', compact('user', 'data_user', 'lastId'));
     }
 
     /**
@@ -31,7 +33,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'password' => 'required|confirmed'
+        ]);
+
+        $user = new User();
+        $data_user = User::where('id','=',$request->id)->first();
+        if ($data_user) {
+            return back()->with('info', 'User sudah terdaftar di dalam sistem');
+        }
+
+        $user->name = $request->name;
+        $user->email = $request->password;
+        $user->password = bcrypt($request->password);
+
+        $user->save();
+        return back()->with('success', 'Data berhasil ditambah');
     }
 
     /**

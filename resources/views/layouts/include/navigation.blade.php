@@ -35,7 +35,7 @@
         <li class="nav-item {{ request()->is('admin/user') ? 'active' : '' }}">
             <a class="nav-link" href="{{route('user.index')}}">
                 <i class="fas fa-fw fa-table"></i>
-                <span>Tables</span></a>
+                <span>User</span></a>
         </li>
         @endif
 

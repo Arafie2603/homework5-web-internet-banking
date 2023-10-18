@@ -16,8 +16,6 @@ class User extends Model implements Authenticatable
         'name',
         'email',
         'password',
-        'role_id',
-        'image'
     ];
 
     public function accounts()
