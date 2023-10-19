@@ -9,7 +9,7 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">Homework 6</div>
+            <div class="sidebar-brand-text mx-3">69 Wallet</div>
         </a>
 
         <!-- Divider -->
@@ -23,6 +23,11 @@
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
+        {{-- <li class="nav-item active">
+            <a class="nav-link" href="{{route('pages.kategori')}}">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span></a>
+        </li> --}}
         @endif
         {{-- =====UNTUK ADMIN ===== --}}
         @if (Auth::user()->role_id == 1)
@@ -39,8 +44,13 @@
         </li>
         <li class="nav-item {{ request()->is('admin/kategori') ? 'active' : '' }}">
             <a class="nav-link" href="{{route('kategori.index')}}">
-                <i class="fas fa-fw fa-credit-card"></i>
-                <span>Produk    </span></a>
+                <i class="fas fa-fw fa-tag"></i>
+                <span>Kategori</span></a>
+        </li>
+        <li class="nav-item {{ request()->is('admin/produk') ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('produk.index')}}">
+                <i class="fas fa-fw fa-box"></i>
+                <span>Produk</span></a>
         </li>
         @endif
 

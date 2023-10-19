@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use Illuminate\Routing\RouteGroup;
@@ -35,6 +36,7 @@ Route::group(['middleware' => ['auth', 'cekleveladmin'], 'prefix' => 'admin'], f
     // Route::get('dashboard', 'App\Http\Controllers\DashboardAdminController@index')->name('dashboard');
     Route::get('dashboard', [AdminController::class, 'index']);
     Route::resource('user', UserController::class);
+    Route::resource('produk', ProdukController::class);
     Route::resource('kategori', KategoriController::class);
 });
 

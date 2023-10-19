@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produk;
 use Illuminate\Http\Request;
+use \App\Models\Kategori;
+use \App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class ProdukController extends Controller
 {
@@ -11,7 +15,13 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        return view('admin.produk');
+        $kategori = Kategori::all();
+        $produk = Produk::paginate(5);
+        $user = User::where('id', '=', Auth::user()->id)->firstOrFail();
+        $lastId = Produk::latest()->value('id_produk');
+
+        
+        return view('admin.produk', compact('kategori', 'produk', 'user', 'lastId'));
     }
 
     /**
@@ -27,7 +37,25 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $produk = new Produk();
+        $jumlah = Produk::count();
+        $produk->kategori_id = $request->kategori_id;
+        $produk->nama_produk = $request->nama_produk;
+        $produk->kode_produk= "PR".str_pad($jumlah+1, 5, '0', STR_PAD_LEFT);
+        $produk->harga = $request->harga;
+        $produk->poin = $request->poin;
+        $produk->status = $request->status;
+
+        if ($request->hasFile('foto_produk')) {
+            $image = $request->file('foto_produk');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/storage', $imageName);
+            $produk->foto_produk = '/' . $imageName;
+        }
+
+        $produk->save();
+        return back()->with('success', 'Data berhasil ditambah');
+
     }
 
     /**

@@ -21,6 +21,14 @@
                         </div>
                     </div>
                 @endif
+                @if (session('info'))
+                    <div class="alert alert-info alert-dimissible show fade">
+                        <div class="alert-body">
+                            <button class="close" data-dismiss="alert"><span>x</span></button>
+                            {{ session('info') }}
+                        </div>
+                    </div>
+                @endif
                 <div class="table-responsive">
                     {{-- ===== Button TAMBAH DATA ===== --}}
                     <a href="#" class="btn btn-primary btn-icon-split mb-3" data-toggle="modal"
@@ -51,9 +59,8 @@
                                     </td>
                                     <td>{{ $kate->nama_kategori }}</td>
                                     @if ('success')
-                                    <td><img src="{{ asset('storage/storage/'.$kate->foto_kategori) }}"
-                                        class="img-thumbnail" width="100"
-                                        height="100" alt=""></td>
+                                        <td><img src="{{ asset('storage/storage/' . $kate->foto_kategori) }}"
+                                                class="img-thumbnail" width="100" height="100" alt=""></td>
                                     @endif
                                     <td>
                                         <a href="#" class="btn btn-warning btn-icon-split" data-toggle="modal"
@@ -80,7 +87,7 @@
         </div>
         {{-- =====MODAL BOX UP & DEL===== --}}
         @foreach ($kategori as $kate)
-            <div class="modal fade" id="hapus_user{{ $kate->id }}" tabindex="-1" role="dialog"
+            <div class="modal fade" id="hapus_user{{ $kate->id_kategori }}" tabindex="-1" role="dialog"
                 aria-labelledby="hapus-siswa" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -97,7 +104,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                            <form action="{{ url('admin/user', $kate->id) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ url('admin/kategori', $kate->id_kategori) }}" method="POST" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button class="btn btn-danger" type="submit">hapus</button>
@@ -124,12 +131,14 @@
                             @csrf
                             <div class="modal-body">
                                 <div class="form-group mt-3">
-                                    <input type="text" id="nama_kategori" name="nama_kategori" placeholder="Masukkan name staff"
-                                        class="form-control" required autocomplete="off" value="{{ $kate->nama_kategori }}">
+                                    <input type="text" id="nama_kategori" name="nama_kategori"
+                                        placeholder="Masukkan name staff" class="form-control" required autocomplete="off"
+                                        value="{{ $kate->nama_kategori }}">
                                 </div>
                                 <div class="form-group mt-3">
                                     <div class="form-group mt-3">
-                                        <input id="foto_kategori" type="file" name="foto_kategori" class="form-control">
+                                        <input id="foto_kategori" type="file" name="foto_kategori"
+                                            class="form-control">
                                         @error('foto_kategori')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror

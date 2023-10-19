@@ -89,6 +89,8 @@ class KategoriController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $kategori = Kategori::where('id_kategori','=',$id)->firstOrFail();
+        $kategori->delete();
+        return back()->with('info', 'Data berhasil dihapus');
     }
 }
