@@ -37,6 +37,11 @@
                 <i class="fas fa-fw fa-table"></i>
                 <span>User</span></a>
         </li>
+        <li class="nav-item {{ request()->is('admin/kategori') ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('kategori.index')}}">
+                <i class="fas fa-fw fa-credit-card"></i>
+                <span>Produk    </span></a>
+        </li>
         @endif
 
         <!-- Divider -->

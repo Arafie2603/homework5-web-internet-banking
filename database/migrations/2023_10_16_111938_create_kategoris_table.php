@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('kategoris', function (Blueprint $table) {
             $table->id('id_kategori');
             $table->string('nama_kategori');
-            $table->string('foto_kategori');
+            $table->string('foto_kategori')->default('default.jpg');
             $table->timestamps();
         });
     }

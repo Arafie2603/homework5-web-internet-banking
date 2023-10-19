@@ -71,7 +71,7 @@ class LoginController extends Controller
                 'email' => $request->email,
             ]);
             $user = User::find(session('id'));
-            $id = session()->get('id');
+            // $id = session()->get('id');
 
             $result = User::where('id', session()->get('id'))->first();
             if ($request->hasFile('image')) {
