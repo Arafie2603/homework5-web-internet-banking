@@ -36,8 +36,9 @@ Route::group(['middleware' => 'NoAuth'], function() {
 
 Route::group(['middleware' => ['auth', 'cekleveladmin'], 'prefix' => 'admin'], function(){
     // Route::get('dashboard', 'App\Http\Controllers\DashboardAdminController@index')->name('dashboard');
-    Route::get('dashboard', [AdminController::class, 'index']);
+    Route::resource('dashboard', AdminController::class);
     Route::resource('user', UserController::class);
+    // Route::get('user', [AdminController::class, 'userInfo'])->name('user.userInfo');
     Route::resource('produk', ProdukController::class);
     Route::resource('kategori', KategoriController::class);
 });
