@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\KategoriProduk;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\ProdukUserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use Illuminate\Routing\RouteGroup;
@@ -41,8 +43,12 @@ Route::group(['middleware' => ['auth', 'cekleveladmin'], 'prefix' => 'admin'], f
 });
 
 Route::group(['middleware' => 'auth', 'checkaccess'], function() {
-    Route::get('/dashboard', [PagesController::class, 'index'])->name('pages.index');
+    Route::resource('dashboard_user', UserController::class);
     Route::get('/profile', [LoginController::class, 'profile'])->name('profile');
+
+    Route::resource('kategori_produk', KategoriProduk::class);
+    Route::get('produk_kategori/{id}', 'App\Http\Controllers\KategoriProduk@show');
+
     Route::put('update_profile', [LoginController::class, 'update_profile']);
     Route::post('update_profile', [LoginController::class, 'update_profile']);
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
