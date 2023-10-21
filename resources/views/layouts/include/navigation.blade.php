@@ -18,16 +18,16 @@
         <!-- Nav Item - Dashboard -->
         {{-- ======= UNTUK USER ====== --}}
         @if (Auth::user()->role_id == 0)
-        <li class="nav-item active">
-            <a class="nav-link" href="{{route('pages.index')}}">
+        <li class="nav-item {{ request()->is('dashboard_user') ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('dashboard_user.index')}}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
-        {{-- <li class="nav-item active">
-            <a class="nav-link" href="{{route('pages.kategori')}}">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span></a>
-        </li> --}}
+        <li class="nav-item {{ request()->is('kategori_produk') ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('kategori_produk.index')}}">
+                <i class="fas fa-fw fa-tag"></i>
+                <span>Produk</span></a>
+        </li>
         @endif
         {{-- =====UNTUK ADMIN ===== --}}
         @if (Auth::user()->role_id == 1)

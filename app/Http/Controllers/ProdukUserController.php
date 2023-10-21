@@ -3,18 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use \App\Models\Kategori;
+use \App\Models\Produk;
+use \App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
-class AdminController extends Controller
+class ProdukUserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {
-        return view('admin.dashboard');
+    {   $kategori = Kategori::all();
+        $produk = Produk::paginate(5);
+        $user = User::where('id', '=', Auth::user()->id)->firstOrFail();
+        $lastId = Produk::latest()->value('id_produk');
+
+        
+        return view('pages.produk', compact('kategori', 'produk', 'user', 'lastId'));
     }
-   
 
     /**
      * Show the form for creating a new resource.
@@ -53,21 +60,7 @@ class AdminController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        request()->validate([
-            'password_confirmation' => 'same:password_baru',
-        ]);
-
-        $user = User::findorfail($id);
-        $user->id = $request->id;
-        $user->name = $request->name;
-        $user->email = $request->email;
-
-        if($request->password_baru) {
-            $user->password = bcrypt($request->password_baru);
-        }
-
-        $user->save();
-        return back()->with('success', 'Data berhasil diubah!');
+        //
     }
 
     /**
@@ -75,8 +68,6 @@ class AdminController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = User::where('id','=',$id)->firstOrFail();
-        $user->delete();
-        return back()->with('info', 'Data berhasil dihapus');
+        //
     }
 }

@@ -23,6 +23,16 @@ class User extends Model implements Authenticatable
         return $this->hasMany(Accounts::class);
     }
 
+    public function akun()
+    {
+        return $this->hasOne(Akun::class);
+    }
+
+    public function transaksi()
+    {
+        return $this->hasMany(Transaksi::class);
+    }
+
     public function getAuthPassword()
     {
         return $this->password;

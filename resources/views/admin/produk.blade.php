@@ -58,7 +58,7 @@
                                     </td>
                                     <td>{{ $prod->nama_produk }}</td>
                                     <td>{{ $prod->kode_produk }}</td>
-                                    <td>{{$prod->kategori->nama_kategori}}</td>
+                                    <td>{{ $prod->kategori->nama_kategori }}</td>
 
                                     @if ('success')
                                         <td><img src="{{ asset('storage/storage/' . $prod->foto_produk) }}"

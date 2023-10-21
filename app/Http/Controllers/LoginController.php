@@ -38,12 +38,12 @@ class LoginController extends Controller
                 'name' => $session->name,
                 'email' => $session->email,
                 'role_id' => $session->role_id,
-                'id' => $session->id
+                'id_user' => $session->id
             ]);
             if($session->role_id == 1){
                 return redirect()->intended('admin/dashboard')->with('success', "Selamat Datang ". $session->name);
             }else {
-                return redirect()->to('/dashboard')->with('success', "Selamat Datang ". $session->nama);
+                return redirect()->to('dashboard_user')->with('success', "Selamat Datang ". $session->nama);
             }
         } else {
             return Redirect::to('/')->with('message', 'email atau password salah');

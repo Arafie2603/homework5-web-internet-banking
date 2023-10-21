@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kategori;
 use Illuminate\Http\Request;
-use App\Models\User;
+use \App\Models\Produk;
+use \App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
-class AdminController extends Controller
+class KategoriProduk extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $kategori = Kategori::all();
+        return view('pages.kategori_produk', compact('kategori'));
     }
-   
 
     /**
      * Show the form for creating a new resource.
@@ -37,7 +40,13 @@ class AdminController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $produk = Produk::where('kategori_id', $id )->get();
+        $kategori = Kategori::where('id_kategori', $id)->firstorfail();
+        // @dd($transaksidetail->p);
+        $data_kategori = Kategori::all();
+
+        
+        return view('pages.produk', compact('kategori', 'produk', 'data_kategori'));
     }
 
     /**
@@ -53,21 +62,7 @@ class AdminController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        request()->validate([
-            'password_confirmation' => 'same:password_baru',
-        ]);
-
-        $user = User::findorfail($id);
-        $user->id = $request->id;
-        $user->name = $request->name;
-        $user->email = $request->email;
-
-        if($request->password_baru) {
-            $user->password = bcrypt($request->password_baru);
-        }
-
-        $user->save();
-        return back()->with('success', 'Data berhasil diubah!');
+        //
     }
 
     /**
@@ -75,8 +70,6 @@ class AdminController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = User::where('id','=',$id)->firstOrFail();
-        $user->delete();
-        return back()->with('info', 'Data berhasil dihapus');
+        //
     }
 }
