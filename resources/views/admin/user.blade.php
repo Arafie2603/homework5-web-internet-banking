@@ -179,8 +179,10 @@
                         @csrf
                         <div class="modal-body">
                             <div class="form-group mt-3">
-                                <input type="text" id="id" name="id" placeholder="Masukkan nomor id" value="{{$lastId+1}}"
-                                    class="form-control" required autocomplete="off" pattern="[0-9]+" maxlength="5" disabled>
+
+                                <input type="text" id="id" name="id" placeholder="Masukkan nomor id"
+                                    value="{{ $lastId + 2 }}" class="form-control" required autocomplete="off"
+                                    pattern="[0-9]+" maxlength="5" disabled>
                             </div>
                             <div class="form-group mt-3">
                                 <input type="text" id="name" name="name" placeholder="Masukkan nama anda"
@@ -188,6 +190,14 @@
                             </div>
                             <div class="form-group mt-3">
                                 <input type="email" id="email" name="email" placeholder="Masukkan email"
+                                    class="form-control" required autocomplete="off">
+                            </div>
+                            <div class="form-group mt-3">
+                                <input type="number" id="saldo" name="saldo" placeholder="Masukkan saldo"
+                                    class="form-control" required autocomplete="off">
+                            </div>
+                            <div class="form-group mt-3">
+                                <input type="number" id="poin" name="poin" placeholder="Masukkan poin"
                                     class="form-control" required autocomplete="off">
                             </div>
                             <div class="form-group mt-3">
