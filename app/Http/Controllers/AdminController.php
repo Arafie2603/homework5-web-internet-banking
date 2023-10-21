@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -14,7 +15,7 @@ class AdminController extends Controller
     {
         return view('admin.dashboard');
     }
-   
+
 
     /**
      * Show the form for creating a new resource.
@@ -27,9 +28,10 @@ class AdminController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $id)
     {
-        //
+        
+        
     }
 
     /**
@@ -53,21 +55,7 @@ class AdminController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        request()->validate([
-            'password_confirmation' => 'same:password_baru',
-        ]);
-
-        $user = User::findorfail($id);
-        $user->id = $request->id;
-        $user->name = $request->name;
-        $user->email = $request->email;
-
-        if($request->password_baru) {
-            $user->password = bcrypt($request->password_baru);
-        }
-
-        $user->save();
-        return back()->with('success', 'Data berhasil diubah!');
+        
     }
 
     /**
@@ -75,8 +63,6 @@ class AdminController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = User::where('id','=',$id)->firstOrFail();
-        $user->delete();
-        return back()->with('info', 'Data berhasil dihapus');
+        
     }
 }
