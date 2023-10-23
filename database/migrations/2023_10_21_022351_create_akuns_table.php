@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('accounts', function (Blueprint $table) {
-            $table->id();
-            $table->integer('amount');
-            $table->string('address');
+        Schema::create('akuns', function (Blueprint $table) {
+            $table->id('id_akun');
             $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('no_telp');
+            $table->integer('poin')->default(0);
+            $table->integer('saldo')->default(0);
+            $table->integer('pengeluaran');
             $table->timestamps();
         });
     }
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('accounts');
+        Schema::dropIfExists('akuns');
     }
 };

@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('layouts.base2')
 
 @section('content')
 <div class="container-fluid">
@@ -17,71 +17,92 @@
 
     <div class="container-fluid p-0">
         <div class="row">
-            @foreach ($produk as $pd)
-                <div class="col-lg-6">
-                    <form action="{{ url('warung/tambah') }}" method="POST">
-                        @csrf
 
-                        <div class="card p-3 pt-4 pb-4">
-                            <div class="d-flex align-items-center" style="height: 100px">
-                                @if ($pd->status == 'Kosong')
-                                    <div class="p-2">
-                                        <img class="flex-shrink-0 img-thumbnail rounded produk img-fluid"
-                                            src="{{ asset('storage/storage/' . $pd->foto_produk) }}"
-                                            alt="" style="width: 120px;filter: grayscale(100%)">
+            <!-- Telkomsel -->
+            <div class="col-xl-12 col-md-6 mb-4">
+
+                <div class="card border-left-primary shadow h-100">
+
+                    <div class="card-body" align="Center">
+                        <img src="{{asset('assets/telkom.png')}}" alt="Telkomsel" class="img-fluid" style="width: 200px;">
+                        <h5 class="card-title"></h5>
+                        {{-- ===== AWALAN FORM ===== --}}
+                        <form action="{{url('produk_beli')}}" enctype="multipart/form-data" method="POST">
+                            <div class="form-group">
+                                <label for="no_telp">Masukkan Nomor HP</label>
+                                <input type="text" class="form-control" id="no_telp"
+                                placeholder="Masukkan nomor HP" value="" required>
+                            </div>
+                            <div class="row">
+                            @foreach ($produk as $prd)
+                                @csrf
+                                <div class="col-3">
+                                    <div class="card text-left mb-3">
+                                        <img src="{{ asset('storage/storage/' . $prd->foto_produk) }}"
+                                            class="img-thumbnail" width="100%" height="100" alt="">
+                                        <div class="card-body">
+                                            <h5 class="card-title ">{{$prd->nama_produk}}</h5>
+                                            <h6 class="card-title font-weight-bold">Rp{{ number_format($prd->harga, 0, ',', '.') }}</h6>
+                                            <a href="{{url('produk_pembayaran')}}/{{$prd->id_produk}}"
+                                                class="btn btn-primary btn-block">Beli</a>
+                                        </div>
                                     </div>
-                                @else
-                                    <div class="p-2">
-                                        <img class="flex-shrink-0 img-thumbnail rounded produk img-fluid"
-                                            src="{{ asset('storage/storage/' . $pd->foto_produk) }}"
-                                            alt="" style="width: 120px">
-                                    </div>
-                                @endif
-
-
-
-
-                                <div class="p-2">
-                                    <span>{{ $pd->nama_produk }}</span>
-                                    <input type="hidden" name="nama" value="{{ $pd->nama_produk }}">
-                                    <span class="text-primary">Rp{{ number_format($pd->harga) }}</span>
                                 </div>
-
-
-                                <div class="p-2 ml-2" style="margin-left: auto !important">
-                                    @if ($pd->status == 'Kosong')
-                                        <button disabled type="submit" style="width: 140px"
-                                            class="btn btn-secondary tombol"><i
-                                                class="fas fa-fw fa-x"></i><span class="keranjang">
-                                                Kosong</span></button>
+                            </form>
+                            
+                            @endforeach
+                            
+                            
+                        </div>
+                        
+                    </div>
                     
-                                        {{-- @if (in_array($namaproduk, $db))
-                                            <button disabled type="submit" style="width: 140px"
-                                                class="btn btn-success tombol"><i
-                                                    class="fas fa-fw fa-check"></i><span
-                                                    class="keranjang"> Ditambahkan</span></button>
-                                        @else
-                                            <button type="submit" style="width: 140px"
-                                                class="btn btn-primary tombol"><i
-                                                    class="fas fa-fw fa-add"></i><span class="keranjang">
-                                                    Keranjang</span></button>
-                                        @endif --}}
-                                    @endif
-
-
-                                </div>
-                    </form>
-
-
-
-
-
                 </div>
-            @endforeach
-        </div>
 
+            </div>
+            
+        </div>
+        
     </div>
+</div>
+
+
 
 
 </div>
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin ingin keluar ?</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+        <a class="btn btn-primary" href="{{route('logout')}}">Keluar</a>
+    </div>
 @endsection
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{asset('assets/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{ asset('assets/js/sb-admin-2.min.js')}}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{{ asset('assets/vendor/chart.js/Chart.min.js') }}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{ asset('assets/js/demo/chart-area-demo.js')}}"></script>
+    <script src="{{ asset('assets/js/demo/chart-pie-demo.js')}}"></script>
+
+</body>
+
+</html>

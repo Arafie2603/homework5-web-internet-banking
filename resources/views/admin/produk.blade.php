@@ -90,6 +90,7 @@
             </div>
         </div>
         {{-- =====MODAL BOX UP & DEL===== --}}
+        {{-- ===== DELETE ===== --}}
         @foreach ($produk as $prod)
             <div class="modal fade" id="hapus_user{{ $prod->id_produk }}" tabindex="-1" role="dialog"
                 aria-labelledby="hapus-siswa" aria-hidden="true">

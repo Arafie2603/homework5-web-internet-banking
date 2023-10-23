@@ -46,9 +46,7 @@
                                     Saldo</div>
 
 
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    Rp. {{ number_format(session('amount'), 0, ',', '.') }}
-                                </div>
+                                
 
                             </div>
                             <div class="col-auto">

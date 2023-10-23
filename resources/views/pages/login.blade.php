@@ -1,5 +1,5 @@
 @include('layouts.include.head')
-@include('layouts.include.footer')
+
 
 <div class="container">
 

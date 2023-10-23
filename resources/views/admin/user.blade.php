@@ -36,6 +36,8 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Role</th>
+                                <th>Saldo</th>
+                                <th>Poin</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -48,6 +50,14 @@
                                     <td>{{ $dt->name }}</td>
                                     <td>{{ $dt->email }}</td>
                                     <td>{{ $dt->role_id }}</td>
+                                    @if ($dt->akun)
+                                    <td>{{$dt->akun->saldo}}</td>
+                                    <td>{{$dt->akun->poin}}</td>
+
+                                    @else 
+                                    <td>Pengguna belum memiliki akun</td>
+                                    <td>Pengguna belum memiliki akun</td>
+                                    @endif
                                     <td>
                                         <a href="#" class="btn btn-warning btn-icon-split" data-toggle="modal"
                                             data-target="#ubah_user{{ $dt->id }}">
@@ -181,7 +191,7 @@
                             <div class="form-group mt-3">
 
                                 <input type="text" id="id" name="id" placeholder="Masukkan nomor id"
-                                    value="{{ $lastId + 2 }}" class="form-control" required autocomplete="off"
+                                    value="{{ $lastId + 1}}" class="form-control" required autocomplete="off"
                                     pattern="[0-9]+" maxlength="5" disabled>
                             </div>
                             <div class="form-group mt-3">
@@ -198,6 +208,10 @@
                             </div>
                             <div class="form-group mt-3">
                                 <input type="number" id="poin" name="poin" placeholder="Masukkan poin"
+                                    class="form-control" required autocomplete="off">
+                            </div>
+                            <div class="form-group mt-3">
+                                <input type="text" id="no_telp" name="no_telp" placeholder="Masukkan nomor telephone"
                                     class="form-control" required autocomplete="off">
                             </div>
                             <div class="form-group mt-3">

@@ -13,17 +13,56 @@
         <!-- Content Row -->
         <div class="row">
             <!-- Earnings (Monthly) Card Example -->
+
+            <div class="col-xl-6 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                    Saldo </div>
+
+
+
+                                @if ($user->akun->saldo == 0)
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        Rp. {{ number_format(0, 0, ',', '.') }}
+                                    </div>
+                                @else
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        Rp. {{ number_format($user->akun->saldo, 0, ',', '.') }}
+                                    </div>
+                                @endif
+
+
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-6 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Pengeluaran</div>
 
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">Rp.
-                                    {{ number_format(10000, 0, ',', '.') }}
-                                </div>
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    Poin</div>
+                                @if ($user->akun->poin == 0)
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        0
+                                    </div>
+                                @else
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        {{ $user->akun->poin }}
+                                    </div>
+                                @endif
+
+
 
                             </div>
                             <div class="col-auto">
@@ -34,30 +73,7 @@
                 </div>
             </div>
 
-            <!-- Earnings (Monthly) Card Example -->
 
-            <div class="col-xl-6 col-md-6 mb-4">
-                <div class="card border-left-success shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Saldo </div>
-                                   
-
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                        Rp. {{ number_format($saldo, 0, ',', '.') }}
-                                    </div>
-                                
-
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <!-- Earnings (Monthly) Card Example -->
         </div>

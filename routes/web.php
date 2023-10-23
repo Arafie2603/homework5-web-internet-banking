@@ -5,10 +5,12 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KategoriProduk;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProdukUserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +51,8 @@ Route::group(['middleware' => 'auth', 'checkaccess'], function() {
 
     Route::resource('kategori_produk', KategoriProduk::class);
     Route::get('produk_kategori/{id}', 'App\Http\Controllers\KategoriProduk@show');
+    Route::get('produk_pembayaran/{id}', [ProdukController::class, 'bayar']);
+    Route::post('pembayaran', [PembayaranController::class, 'pembayaran'])->name('pembayaran.bayar');
 
     Route::put('update_profile', [LoginController::class, 'update_profile']);
     Route::post('update_profile', [LoginController::class, 'update_profile']);

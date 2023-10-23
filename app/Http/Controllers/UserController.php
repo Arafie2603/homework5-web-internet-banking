@@ -16,25 +16,17 @@ class UserController extends Controller
     {
 
         $user = User::with('akun')->find(Auth::user()->id);
+        $data_user = User::with('akun')->paginate(5);
 
         if ($user->role_id == 1) {
-            $data_user = User::paginate(5);
             $user = User::where('id', '=', Auth::user()->id)->firstOrFail();
-            $lastId = $user->id;
+            $userCount = User::count();
+            $lastUser = User::latest()->first();
+            $lastId = $lastUser->id;
             return view('admin.user', compact('user', 'data_user', 'lastId'));
         } else {
-            try {
-                $saldo = $user->akun->saldo;
-            } catch (\Throwable $th) {
-                $saldo = 0;
-            }
-            return view('pages.user', compact('saldo'));
+            return view('pages.dashboard', compact('user'));
         }
-    }
-    public function admin()
-    {
-        $user = User::all();
-        return view('admin.user', compact('user'));
     }
 
     /**
@@ -57,23 +49,26 @@ class UserController extends Controller
                 'password' => 'required|confirmed'
             ]
         );
-
-        $user = User::with('akun')->all();
         $data_user = User::where('id', '=', $request->id)->first();
         if ($data_user) {
             return back()->with('info', 'Duplikat data (Data Pegawai sudah terdaftar di dalam sistem)');
         }
 
-        $user->id = $request->id;
+        $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->email->saldo = $request->saldo;
-        $user->email->poin = $request->poin;
         $user->password = bcrypt($request->password);
+        $user->save(); // Simpan pengguna baru
+    
+        // Buat entitas Akun yang terkait dengan pengguna
+        $akun = new Akun();
+        $akun->user_id = $request->id;
+        $akun->saldo = $request->saldo;
+        $akun->poin = $request->poin;
+        $akun->no_telp = $request->no_telp;
+        $akun->pengeluaran = 0;
 
-
-
-        $user->save();
+        $user->akun()->save($akun);$user->save();
         return back()->with('success', 'Data Berhasil ditambah');
     }
 
