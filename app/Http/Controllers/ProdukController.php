@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Produk;
 use Illuminate\Http\Request;
 use \App\Models\Kategori;
+use App\Models\Transaksi;
+use App\Models\TransaksiDetail;
 use \App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class ProdukController extends Controller
@@ -30,6 +33,18 @@ class ProdukController extends Controller
     public function create()
     {
         //
+    }
+
+    public function bayar(string $id)
+    {
+        // produk = Produk::where('kategori_id', $id )->get();
+        // $kategori = Kategori::where('id_kategori', $id)->firstorfail();
+        // // @dd($transaksidetail->p);
+        // $data_kategori = Kategori::all();
+
+        $produk =  Produk::where('id_produk', $id)->first();
+        return view('pages.pembayaran', compact('produk'));
+
     }
 
     /**
