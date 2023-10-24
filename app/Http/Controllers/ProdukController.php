@@ -9,6 +9,7 @@ use App\Models\Transaksi;
 use App\Models\TransaksiDetail;
 use \App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 
 class ProdukController extends Controller
@@ -35,7 +36,7 @@ class ProdukController extends Controller
         //
     }
 
-    public function bayar(string $id)
+    public function bayar(Request $request, string $id)
     {
         // produk = Produk::where('kategori_id', $id )->get();
         // $kategori = Kategori::where('id_kategori', $id)->firstorfail();
@@ -43,7 +44,9 @@ class ProdukController extends Controller
         // $data_kategori = Kategori::all();
 
         $produk =  Produk::where('id_produk', $id)->first();
-        return view('pages.pembayaran', compact('produk'));
+        // $tranDetail = TransaksiDetail::with('produk')->where('produk_id', $request->id_produk)->first();
+        $prokat = Produk::with('kategori')->where('kategori_id', $produk->id_produk)->first();
+        return view('pages.pembayaran', compact('produk', 'prokat'));
 
     }
 

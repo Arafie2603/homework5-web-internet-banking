@@ -40,13 +40,18 @@ class KategoriProduk extends Controller
      */
     public function show(string $id)
     {
-        $produk = Produk::where('kategori_id', $id )->get();
+        $kategori_id = $id;
+
+        $produk = Produk::where('kategori_id', $id)->get();
         $kategori = Kategori::where('id_kategori', $id)->firstorfail();
         // @dd($transaksidetail->p);
         $data_kategori = Kategori::all();
+        $user = User::with('akun')->find(Auth::user()->id);
+        // $tranDetail = TransaksiDetail::with('produk')->where('produk_id', $request->id_produk)->first();
+        $kategoriPro = Kategori::with('produk')->where('kategori_id', $kategori_id);
 
-        
-        return view('pages.produk', compact('kategori', 'produk', 'data_kategori'));
+
+        return view('pages.produk', compact('kategori', 'produk', 'data_kategori', 'kategoriPro'));
     }
 
     /**

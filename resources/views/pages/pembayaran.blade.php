@@ -4,7 +4,7 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Kategori Produk</h1>
+        <h1 class="h3 mb-2 text-gray-800"></h1>
         <!-- DataTales Example -->
 
         {{-- <div class="card-header py-3">
@@ -27,10 +27,41 @@
                                 <div class="card-header">
                                     Informasi Rincian Pembelian
                                 </div>
+                                @if (session('error'))
+                                <div class="alert alert-danger alert-dimissible show fade m-2">
+                                    <div class="alert-body">
+                                        <button class="close" data-dismiss="alert"><span>x</span></button>
+                                        {{ session('error') }}
+                                    </div>
+                                </div>
+                                    
+                                @endif
+                                @if (session('warning'))
+                                <div class="alert alert-warning alert-dimissible show fade m-2">
+                                    <div class="alert-body">
+                                        <button class="close" data-dismiss="alert"><span>x</span></button>
+                                        {{ session('warning') }}
+                                    </div>
+                                </div>
+                                    
+                                @endif
+                                @if ($produk->kategori_id == 1)
+
+                                {{-- {{dd($produk->kategori_id)}} --}}
+                                    
                                 <div class="card-body">
                                     <p>Produk: {{ $produk->nama_produk }}</p>
                                     <p>Harga: Rp{{ number_format($produk->harga, 0, ',', '.') }}</p>
+                                    <p>Tukar poin : {{$produk->poin}}</p>
                                 </div>
+                                @elseif ($produk->kategori_id == 2)
+                                <div class="card-body">
+                                    <p>Produk: {{ $produk->nama_produk }}</p>
+                                    <p>Harga: Rp{{ number_format($produk->harga, 0, ',', '.') }}</p>
+                                    <p>Tukar poin : {{$produk->poin}}</p>
+                                </div>
+                                    
+                                @endif
                             </div>
 
                         </div>
@@ -52,11 +83,18 @@
                                     <div class="form-group mt-3">
 
                                         <input type="number" id="harga" name="harga" placeholder="Masukkan nomor id"
-                                            value="{{ $produk->harga }}" class="form-control w-25" required autocomplete="off"
-                                            pattern="[0-9]+" maxlength="5" readonly>
+                                            value="{{ $produk->harga }}" class="form-control w-25 mb-2" required autocomplete="off"
+                                            pattern="[0-9]+" maxlength="5" hidden>
+                                        <input type="number" id="poin" name="poin" placeholder="Masukkan nomor id"
+                                            value="{{ $produk->poin }}" class="form-control w-25" required autocomplete="off"
+                                            pattern="[0-9]+" maxlength="5" hidden>
+
+                                        <input type="number" id="id_produk" name="id_produk" placeholder="Masukkan nomor id"
+                                            value="{{ $produk->id_produk }}" class="form-control w-25" required autocomplete="off"
+                                            pattern="[0-9]+" maxlength="5" hidden>
                                     </div>
                             
-                                <button type="submit" class="btn btn-primary btn-block w-25 mt-2">
+                                <button value="{{$produk->id_produk}}" type="submit" class="btn btn-primary btn-block w-25 mt-2">
                                     Bayar
                                 </button>
 

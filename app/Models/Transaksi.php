@@ -16,7 +16,6 @@ class Transaksi extends Model
 
     public function akuns()
     {
-    
         return $this->belongsTo(Akun::class, 'akun_id', 'id_akun');
     }
 

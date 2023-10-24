@@ -14,6 +14,8 @@ use App\Models\User;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
+use function PHPUnit\Framework\returnSelf;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,6 +47,7 @@ Route::group(['middleware' => ['auth', 'cekleveladmin'], 'prefix' => 'admin'], f
     Route::resource('kategori', KategoriController::class);
 });
 
+
 Route::group(['middleware' => 'auth', 'checkaccess'], function() {
     Route::resource('dashboard_user', UserController::class);
     Route::get('/profile', [LoginController::class, 'profile'])->name('profile');
@@ -53,6 +56,7 @@ Route::group(['middleware' => 'auth', 'checkaccess'], function() {
     Route::get('produk_kategori/{id}', 'App\Http\Controllers\KategoriProduk@show');
     Route::get('produk_pembayaran/{id}', [ProdukController::class, 'bayar']);
     Route::post('pembayaran', [PembayaranController::class, 'pembayaran'])->name('pembayaran.bayar');
+    Route::post('receipt', [PembayaranController::class, 'receipt'])->name('receipt');
 
     Route::put('update_profile', [LoginController::class, 'update_profile']);
     Route::post('update_profile', [LoginController::class, 'update_profile']);

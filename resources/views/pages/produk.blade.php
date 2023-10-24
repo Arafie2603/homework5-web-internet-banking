@@ -4,7 +4,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Kategori Produk</h1>
+    <h1 class="h3 mb-2 text-gray-800">{{$kategori->nama_kategori}}</h1>
     <!-- DataTales Example -->
 
     {{-- <div class="card-header py-3">
@@ -24,17 +24,11 @@
                 <div class="card border-left-primary shadow h-100">
 
                     <div class="card-body" align="Center">
-                        <img src="{{asset('assets/telkom.png')}}" alt="Telkomsel" class="img-fluid" style="width: 200px;">
                         <h5 class="card-title"></h5>
                         {{-- ===== AWALAN FORM ===== --}}
                         <form action="{{url('produk_beli')}}" enctype="multipart/form-data" method="POST">
-                            <div class="form-group">
-                                <label for="no_telp">Masukkan Nomor HP</label>
-                                <input type="text" class="form-control" id="no_telp"
-                                placeholder="Masukkan nomor HP" value="" required>
-                            </div>
                             <div class="row">
-                            @foreach ($produk as $prd)
+                                @foreach ($produk as $prd)
                                 @csrf
                                 <div class="col-3">
                                     <div class="card text-left mb-3">
@@ -45,15 +39,15 @@
                                             <h6 class="card-title font-weight-bold">Rp{{ number_format($prd->harga, 0, ',', '.') }}</h6>
                                             <a href="{{url('produk_pembayaran')}}/{{$prd->id_produk}}"
                                                 class="btn btn-primary btn-block">Beli</a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
-                            
-                            @endforeach
-                            
-                            
-                        </div>
+                                    @endforeach
+                                </form>
+                                
+                                
+                                
+                            </div>
                         
                     </div>
                     
