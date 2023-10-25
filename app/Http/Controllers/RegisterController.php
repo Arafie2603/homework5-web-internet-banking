@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Akun;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -45,17 +46,26 @@ class RegisterController extends Controller
         ]);
     
 
+        $password = Hash::make($request->password);
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $password;
+        $user->role_id = 0;
+        $user->image = 'default.png';
+
+        $user->save();
+
+        $akun = new Akun();
+        $akun->user_id = $user->id;
+        $akun->no_telp = "0000";
+        $akun->poin = 0;
+        $akun->saldo = 0;
+        $akun->pengeluaran = 0;
+        $akun->save();  
+
         try {
-            $password = Hash::make($request->password);
-
-            $user = new User();
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = $password;
-            $user->role_id = 0;
-            $user->image = 'default.png';
-
-            $user->save();
             return redirect()->to('/')->with('success', 'data berhasil ditambahkan');
         } catch (\Throwable $th) {
             //throw $th;

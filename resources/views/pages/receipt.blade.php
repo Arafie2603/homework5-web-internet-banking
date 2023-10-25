@@ -1,4 +1,5 @@
-@extends('layouts.base')
+@include('layouts.include.head')
+
 
 @section('content')
     <main class="content" style="width: 500px; margin:auto;padding-top: 40px">
@@ -37,13 +38,14 @@
                                                 </tr>
                                             </table>
                                             {{ str_pad('', 41, '=') }}
-                                
+
                                             <table style="width: 100%">
-                                                    <tr>
-                                                        <td style="width: 40%">{{ $tranDetail->produk->nama_produk }}</td>
-                                                        <td style="width: 50%">{{ $tranDetail->jumlah }}</td>
-                                                        <td>Rp{{ number_format($tranDetail->harga_satuan * $tranDetail->jumlah) }}</td>
-                                                    </tr>
+                                                <tr>
+                                                    <td style="width: 40%">{{ $tranDetail->produk->nama_produk }}</td>
+                                                    <td style="width: 50%">{{ $tranDetail->jumlah }}</td>
+                                                    <td>Rp{{ number_format($tranDetail->harga_satuan * $tranDetail->jumlah) }}
+                                                    </td>
+                                                </tr>
 
                                             </table>
                                             <br>
@@ -73,3 +75,4 @@
         </div>
     </main>
 @endsection
+@include('layouts.include.footer')

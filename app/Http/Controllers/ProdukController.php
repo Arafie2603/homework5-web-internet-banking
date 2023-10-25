@@ -42,11 +42,11 @@ class ProdukController extends Controller
         // $kategori = Kategori::where('id_kategori', $id)->firstorfail();
         // // @dd($transaksidetail->p);
         // $data_kategori = Kategori::all();
-
+        $user = User::with('akun')->find(Auth::user()->id);
         $produk =  Produk::where('id_produk', $id)->first();
         // $tranDetail = TransaksiDetail::with('produk')->where('produk_id', $request->id_produk)->first();
         $prokat = Produk::with('kategori')->where('kategori_id', $produk->id_produk)->first();
-        return view('pages.pembayaran', compact('produk', 'prokat'));
+        return view('pages.pembayaran', compact('produk', 'prokat', 'user'));
 
     }
 

@@ -45,7 +45,8 @@
                                 <th>Kode</th>
                                 <th>Kategori</th>
                                 <th>Foto</th>
-                                <th>Harga</th>
+                                <th>Harga saldo</th>
+                                <th>Harga poin</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -64,7 +65,8 @@
                                         <td><img src="{{ asset('storage/storage/' . $prod->foto_produk) }}"
                                                 class="img-thumbnail" width="100" height="100" alt=""></td>
                                     @endif
-                                    <td>{{ number_format($prod->harga) }}</td>
+                                    <td>Rp{{ number_format($prod->harga) }}</td>
+                                    <td>{{ $prod->poin }}</td>
                                     <td>{{ $prod->status }}</td>
                                     <td>
                                         <a href="#" class="btn btn-warning btn-icon-split" data-toggle="modal"

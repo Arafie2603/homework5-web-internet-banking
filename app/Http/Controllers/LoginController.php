@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Akun;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -43,7 +44,8 @@ class LoginController extends Controller
             if($session->role_id == 1){
                 return redirect()->intended('admin/dashboard')->with('success', "Selamat Datang ". $session->name);
             }else {
-                return redirect()->to('dashboard_user')->with('success', "Selamat Datang ". $session->nama);
+                $user = User::with('akun')->find(Auth::user()->id);
+                return view('pages.dashboard', compact('user'))->with('success', "Selamat Datang ". $session->nama);
             }
         } else {
             return Redirect::to('/')->with('message', 'email atau password salah');
@@ -97,6 +99,9 @@ class LoginController extends Controller
                 'email' =>  $result->email,
                 'image' => time() . '.' . $request->image->extension(),
             ]);
+
+            
+            
 
             return redirect()->back()->with('success', 'data berhasil diupdate');
         } catch (\Throwable $th) {

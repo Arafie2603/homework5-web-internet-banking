@@ -50,9 +50,10 @@
                                 {{-- {{dd($produk->kategori_id)}} --}}
                                     
                                 <div class="card-body">
-                                    <p>Produk: {{ $produk->nama_produk }}</p>
-                                    <p>Harga: Rp{{ number_format($produk->harga, 0, ',', '.') }}</p>
-                                    <p>Tukar poin : {{$produk->poin}}</p>
+                                    <p>Produk &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ $produk->nama_produk }}</p>
+                                    <p>Harga &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Rp{{ number_format($produk->harga, 0, ',', '.') }}</p>
+                                    <p>Tukar poin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{$produk->poin}}</p>
+                                    <p>No Telephone : {{$user->akun->no_telp}}</p>
                                 </div>
                                 @elseif ($produk->kategori_id == 2)
                                 <div class="card-body">
@@ -62,44 +63,46 @@
                                 </div>
                                     
                                 @endif
+                                <div class="p-4">
+                                    <form action="{{ url('pembayaran') }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+        
+                                        <label for="">Pilih metode pembayaran : </label>
+                                        
+                                            <div class="form-check">
+                                                <input type="radio" id="payment-option1" name="payment" class="form-check-input"
+                                                    value="saldo">
+                                                <label class="form-check-label" for="payment-option1">Saldo</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="radio" id="payment-option2" name="payment" class="form-check-input"
+                                                    value="poin">
+                                                <label class="form-check-label" for="payment-option2">Poin</label>
+                                            </div>
+                                            <div class="form-group mt-3">
+        
+                                                <input type="number" id="harga" name="harga" placeholder="Masukkan nomor id"
+                                                    value="{{ $produk->harga }}" class="form-control w-25 mb-2" required autocomplete="off"
+                                                    pattern="[0-9]+" maxlength="5" hidden>
+                                                <input type="number" id="poin" name="poin" placeholder="Masukkan nomor id"
+                                                    value="{{ $produk->poin }}" class="form-control w-25" required autocomplete="off"
+                                                    pattern="[0-9]+" maxlength="5" hidden>
+        
+                                                <input type="number" id="id_produk" name="id_produk" placeholder="Masukkan nomor id"
+                                                    value="{{ $produk->id_produk }}" class="form-control w-25" required autocomplete="off"
+                                                    pattern="[0-9]+" maxlength="5" hidden>
+                                            </div>
+                                    
+                                        <button value="{{$produk->id_produk}}" type="submit" class="btn btn-primary btn-block w-25 mt-2">
+                                            Bayar
+                                        </button>
+        
+                                    </form>
+                                </div>
                             </div>
 
                         </div>
 
-                        <div class="p-4">
-                            <form action="{{ url('pembayaran') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                
-                                    <div class="form-check">
-                                        <input type="radio" id="payment-option1" name="payment" class="form-check-input"
-                                            value="saldo">
-                                        <label class="form-check-label" for="payment-option1">Saldo</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input type="radio" id="payment-option2" name="payment" class="form-check-input"
-                                            value="poin">
-                                        <label class="form-check-label" for="payment-option2">Poin</label>
-                                    </div>
-                                    <div class="form-group mt-3">
-
-                                        <input type="number" id="harga" name="harga" placeholder="Masukkan nomor id"
-                                            value="{{ $produk->harga }}" class="form-control w-25 mb-2" required autocomplete="off"
-                                            pattern="[0-9]+" maxlength="5" hidden>
-                                        <input type="number" id="poin" name="poin" placeholder="Masukkan nomor id"
-                                            value="{{ $produk->poin }}" class="form-control w-25" required autocomplete="off"
-                                            pattern="[0-9]+" maxlength="5" hidden>
-
-                                        <input type="number" id="id_produk" name="id_produk" placeholder="Masukkan nomor id"
-                                            value="{{ $produk->id_produk }}" class="form-control w-25" required autocomplete="off"
-                                            pattern="[0-9]+" maxlength="5" hidden>
-                                    </div>
-                            
-                                <button value="{{$produk->id_produk}}" type="submit" class="btn btn-primary btn-block w-25 mt-2">
-                                    Bayar
-                                </button>
-
-                            </form>
-                        </div>
                     </div>
 
                 </div>
@@ -115,7 +118,23 @@
 
 
     </div>
+    <!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin ingin keluar ?</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+        <a class="btn btn-primary" href="{{route('logout')}}">Keluar</a>
+    </div>
 @endsection
+
 <!-- Bootstrap core JavaScript-->
 <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

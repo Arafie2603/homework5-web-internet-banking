@@ -70,7 +70,7 @@ class PembayaranController extends Controller
             $user->akun->poin = $poinBaru;
         }
 
-     
+
 
         if ($request->payment == 'saldo' && $hargaProduk > $saldoUser) {
             return redirect()->back()->with('error', 'Maaf saldo anda tidak mencukupi, silahkan isi terlebih dahulu');

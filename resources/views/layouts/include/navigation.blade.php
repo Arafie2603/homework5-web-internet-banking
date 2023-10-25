@@ -2,7 +2,7 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-light sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-light sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -24,17 +24,19 @@
                     <span style="color: black;"
                         class="{{ request()->is('dashboard_user') ? 'text-black' : '' }}">Dashboard</span></a>
             </li>
+
             <li class="nav-item {{ request()->is('kategori_produk') ? 'active' : '' }}" style="color: black;">
                 <a class="nav-link" href="{{ route('kategori_produk.index') }}">
                     <i style="color: black;" class="fas fa-fw fa-box"></i>
                     <span style="color: black;"
                         class="{{ request()->is('kategori_produk') ? 'text-black' : '' }}">Produk</span></a>
+            </li>
 
-            <li class="nav-item {{ request()->is('kategori_produk') ? 'active' : '' }}" style="color:black">
-                <a class="nav-link" href="{{ route('kategori_produk.index') }}">
-                    <i class="fas fa-award" style="color:black"></i>
+            <li class="nav-item {{ request()->is('reward') ? 'active' : '' }}" style="color: black;">
+                <a class="nav-link" href="{{ route('reward') }}">
+                    <i style="color: black;" class="fas fa-fw fa-award"></i>
                     <span style="color: black;"
-                        class="{{ request()->is('kategori_produk') ? 'text-black' : '' }}">Rewards</span></a>
+                        class="{{ request()->is('kategori_produk') ? 'text-black' : '' }}">Reward</span></a>
             </li>
         @endif
         {{-- =====UNTUK ADMIN ===== --}}
@@ -73,8 +75,7 @@
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-
+    <div id="content-wrapper" class="d-flex flex-column bg-white">
         <!-- Main Content -->
         <div id="content">
 
@@ -148,7 +149,9 @@
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
-            @yield('content')
+            <div class="">
+                @yield('content')
+            </div>
             <!-- /.container-fluid -->
 
         </div>

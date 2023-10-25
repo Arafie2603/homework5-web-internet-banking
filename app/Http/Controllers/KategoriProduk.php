@@ -27,6 +27,12 @@ class KategoriProduk extends Controller
         //
     }
 
+    public function halreward()
+    {
+        
+        return view('pages.rewards');
+    }
+
     /**
      * Store a newly created resource in storage.
      */
